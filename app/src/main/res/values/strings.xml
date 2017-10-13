@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Table</string>
+
+    <item name="bottomId" type="id"/>
+</resources>
