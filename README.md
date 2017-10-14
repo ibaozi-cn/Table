@@ -4,9 +4,9 @@ android 表单详情 封装实践 架构图如下
 
 ## Activity：
 
-### 1.Activity作为View层 只负责UI的展示，toolbar、recyclerView、multiTypeAdapter、bottomView四个常用部分组成
+#### 1.Activity作为View层 只负责UI的展示，toolbar、recyclerView、multiTypeAdapter、bottomView四个常用部分组成
 
-### 2.multiTypeAdapter是封装好的框架，是个自定义的Adatper，该框架旨在项目中，免去写Adapter的麻烦。支持自动排序（默认正序），拖拽，左右滑动删除等功能，还有加载更多，空布局展示，头尾布局等
+#### 2.multiTypeAdapter是封装好的框架，是个自定义的Adatper，该框架旨在项目中，免去写Adapter的麻烦。支持自动排序（默认正序），拖拽，左右滑动删除等功能，还有加载更多，空布局展示，头尾布局等
 
 ## Presenter：
 
