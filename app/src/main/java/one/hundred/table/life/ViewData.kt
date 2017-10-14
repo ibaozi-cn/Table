@@ -16,13 +16,17 @@ fun textViewData(defaultMap: MutableMap<String, Any> = mutableMapOf()) = tableBe
         itemTableBean {
             key = "name"
             keyName = "客户姓名*"
-            type = ItemTableType.TextEdit(validateData = EmptyValidateData(), defaultEditValue = defaultMap["name"])
+            type = ItemTableType.TextEdit(
+                    validateData = EmptyValidateData(),
+                    defaultEditValue = defaultMap["name"])
 
         },
         itemTableBean {
             key = "old"
             keyName = "客户年龄*"
-            type = ItemTableType.TextEdit(validateData = EmptyValidateData(), defaultEditValue = defaultMap["old"])
+            type = ItemTableType.TextEdit(
+                    validateData = EmptyValidateData(),
+                    defaultEditValue = defaultMap["old"])
 
         },
         itemTableBean {
@@ -51,13 +55,23 @@ fun textViewData(defaultMap: MutableMap<String, Any> = mutableMapOf()) = tableBe
         }
         ,
         itemTableBean {
+            key = "carNum"
             keyName = "车商编号"
             type = ItemTableType.TextSelect(
                     selectList = listOf(mapOf("2" to "2", "3" to "3")),
                     validateData = EmptyValidateData()
             )
         },
+        itemTableBean { },
         itemTableBean {
-
+            key = "action"
+            keyName = "照片"
+            type = ItemTableType.TextAction(
+                    aciton = ACTION_PHOTO,
+                    actionStatus = "2张",
+                    validateData = EmptyValidateData()
+            )
         }
 )
+
+const val ACTION_PHOTO = "action_photo"
