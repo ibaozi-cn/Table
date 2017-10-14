@@ -18,6 +18,7 @@ class LifecycleDemoActivity : LifecycleActivity<LifecyclePresenter>() {
     override fun initToolBarMenu(toolbar: Toolbar) {
         toolbar.addMenu("Show Map")
         toolbar.setOnMenuItemClickListener {
+            appBarLayout.setExpanded(false)
             textMapShow.text = getPresenter().mapObserver.toString()
             true
         }
