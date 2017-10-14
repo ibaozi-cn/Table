@@ -23,3 +23,5 @@ android 表单详情 封装实践 架构图如下
 #### 6.需要展示默认信息的页面：需要一层Map映射，Map的key就对应ItemTableBean中的key
 
 #### 7.在Presenter中创建一个新的map，传入到ItemTransformationFactory的方法中可以自动将EditText，Select的数据自动映射到这个map中，在网络提交的时候直接作为参数即可。
+
+## 详细介绍 [详见地址](http://www.jianshu.com/p/11e2723c4277)
