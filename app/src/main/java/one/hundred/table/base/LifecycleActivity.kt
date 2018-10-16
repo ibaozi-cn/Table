@@ -5,7 +5,7 @@ import android.arch.lifecycle.LifecycleObserver
 /**
  * Created by zzy on 2017/10/13.
  */
- abstract class LifecycleActivity : BaseListActivity() {
+abstract class LifecycleActivity : BaseListActivity() {
 
     override fun removeLifecycleObserver(observer: LifecycleObserver) {
         removeLifeObserver(observer)
@@ -20,7 +20,7 @@ import android.arch.lifecycle.LifecycleObserver
     /**
      * 添加观察者
      */
-    fun addLifeObserver(observer: LifecycleObserver) {
+    private fun addLifeObserver(observer: LifecycleObserver) {
         listObserver.add(observer)
         lifecycle.addObserver(observer)
     }
@@ -33,18 +33,7 @@ import android.arch.lifecycle.LifecycleObserver
     /**
      * 删除某个观察者
      */
-    fun removeLifeObserver(observer: LifecycleObserver) {
+    private fun removeLifeObserver(observer: LifecycleObserver) {
         lifecycle.removeObserver(observer)
     }
-
-    /**
-     * 主动释放所有观察者
-     */
-    override fun onDestroy() {
-        listObserver.forEach {
-            removeLifeObserver(it)
-        }
-        super.onDestroy()
-    }
-
 }

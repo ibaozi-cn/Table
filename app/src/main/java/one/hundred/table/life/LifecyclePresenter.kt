@@ -26,30 +26,4 @@ class LifecyclePresenter(val mapObserver: MutableMap<String, Any> = mutableMapOf
                     }
                 })
     }
-
-    /**
-     * 监听Activity onDestroy
-     */
-    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-    fun onViewDestroy() {
-        Log.d("OnLifecycleEvent", "onViewDestroy")
-        //适当释放不必要资源
-    }
-
-    /**
-     * 监听Activity onStart
-     */
-    @OnLifecycleEvent(Lifecycle.Event.ON_START)
-    fun onViewStart() {
-        Log.d("OnLifecycleEvent", "onViewStart")
-
-    }
-
-    /**
-     * 监听Activity onStop
-     */
-    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    fun onViewStop() {
-        Log.d("OnLifecycleEvent", "onViewStop")
-    }
 }
