@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.LinearLayout
 import one.hundred.table.life.LifecycleDemoActivity
-import one.hundred.table.weak.WeakDemoActivity
 import org.jetbrains.anko.button
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.linearLayout
@@ -21,12 +20,6 @@ class MainHomeActivity : AppCompatActivity() {
                     startActivity(intentFor<LifecycleDemoActivity>())
                 }
             }
-            button("低版本栗子") {
-                setOnClickListener {
-                    startActivity(intentFor<WeakDemoActivity>())
-                }
-            }
-
         }
     }
 }

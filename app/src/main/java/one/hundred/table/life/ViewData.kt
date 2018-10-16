@@ -2,6 +2,7 @@ package one.hundred.table.life
 
 import android.text.InputFilter
 import android.text.InputType
+import one.hundred.table.item.factory.SelectType
 import one.hundred.table.item.lib.*
 
 /**
@@ -58,7 +59,7 @@ fun textViewData(defaultMap: MutableMap<String, Any> = mutableMapOf()) = tableBe
             key = "carNum"
             keyName = "车商编号"
             type = ItemTableType.TextSelect(
-                    selectList = listOf(mapOf("2" to "2", "3" to "3")),
+                    selectType = SelectType.TEST,
                     validateData = EmptyValidateData()
             )
         },

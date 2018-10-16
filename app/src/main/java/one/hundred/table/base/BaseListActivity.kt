@@ -1,5 +1,6 @@
 package one.hundred.table.base
 
+import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.AppBarLayout
 import android.support.v7.app.AppCompatActivity
@@ -21,7 +22,7 @@ import org.jetbrains.anko.recyclerview.v7.recyclerView
 /**
  * Created by zzy on 2017/10/13.
  */
-abstract class BaseListActivity<P : BasePresenter> : AppCompatActivity(), BaseView<P> {
+abstract class BaseListActivity : AppCompatActivity(), BaseLifeCycleView {
 
     var adapter = MultiTypeAdapter(AdapterSequence.ASC)
 
@@ -31,9 +32,8 @@ abstract class BaseListActivity<P : BasePresenter> : AppCompatActivity(), BaseVi
 
     lateinit var appBarLayout: AppBarLayout
 
-    private lateinit var presenterCache: P
-
     override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         coordinatorLayout {
             appBarLayout = appBarLayout {
                 fitsSystemWindows = true
@@ -63,15 +63,8 @@ abstract class BaseListActivity<P : BasePresenter> : AppCompatActivity(), BaseVi
             }
 
         }
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onStart() {
         initToolBarMenu(toolbar)
         initBottomView(bottomView)
-        setPresenter(initPresenter())
-        initViewData()
-        super.onStart()
     }
 
     /**
@@ -90,37 +83,17 @@ abstract class BaseListActivity<P : BasePresenter> : AppCompatActivity(), BaseVi
     abstract fun initBottomView(bottomView: LinearLayout)
 
     /**
-     * 初始化 presenter
-     */
-    abstract fun initPresenter(): P
-
-    override fun setPresenter(presenter: P) {
-        this.presenterCache = presenter
-    }
-
-    override fun getPresenter(): P {
-        return presenterCache
-    }
-
-    /**
-     * 初始化RecycleView Item数据
-     */
-    private fun initViewData() {
-        addItemList(presenterCache.initViewData())
-    }
-
-    /**
      * 添加一项 Item
      */
     fun addItem(itemViewModel: ItemViewModel) {
-        adapter.addItem(itemViewModel)
+        adapter.addOrUpdateItem(itemViewModel)
     }
 
     /**
      * 添加 Item集合
      */
     fun addItemList(list: List<ItemViewModel>) {
-        adapter.addListItem(list)
+        adapter.addOrUpdateListItem(list)
     }
 
     /**
@@ -130,13 +103,12 @@ abstract class BaseListActivity<P : BasePresenter> : AppCompatActivity(), BaseVi
         bottomView.addView(view)
     }
 
-    /**
-     * 根据Item UUID 查找Item 并自动转换类型
-     */
-    inline fun <reified T : ItemViewModel> findItem(uuid: String): T? = adapter.findItem(uuid)
-
-    /**
+    /*
      * 设置RecycleView的layoutManager
      */
     open fun getRVLayoutManager(): RecyclerView.LayoutManager = LinearLayoutManager(this)
+
+    override fun getContext(): Context {
+        return this
+    }
 }

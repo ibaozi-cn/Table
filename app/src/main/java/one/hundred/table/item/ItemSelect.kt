@@ -1,10 +1,15 @@
 package one.hundred.table.item
 
 import android.content.DialogInterface
+import android.graphics.Color
 import android.support.v7.app.AlertDialog
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.ForegroundColorSpan
 import android.widget.TextView
 import com.pape.adapter.ItemViewHolder
 import one.hundred.table.R
+import one.hundred.table.item.factory.ItemSelectDataFactory
 import one.hundred.table.item.lib.ItemTable
 import one.hundred.table.item.lib.ItemTableBean
 import one.hundred.table.item.lib.ItemTableType
@@ -13,21 +18,31 @@ import one.hundred.table.item.lib.ItemTableType
  * Created by zzy on 2017/10/13.
  */
 class ItemSelect(tableBean: ItemTableBean, private val observer: (String, String) -> Unit,
-                 val itemSelectClick: ((ItemSelect) -> Unit)? = null
+                 private val itemSelectClick: ((ItemSelect) -> Unit)? = null
 ) : ItemTable(tableBean) {
 
     val itemType: ItemTableType.TextSelect = tableBean.type as ItemTableType.TextSelect
-    private var listSelectData: List<Map<String, String>> = itemType.selectList
+    private var listSelectData: List<Map<String, String>> = mutableListOf()
     private var listValues: Array<CharSequence> = emptyArray()
 
     init {
-        updateSelectData(listSelectData)
+        ItemSelectDataFactory.getData(itemType.selectType, {
+            updateSelectData(it)
+        })
     }
 
     override fun bindData(holder: ItemViewHolder) {
 
         val textView = holder.getView<TextView>(R.id.tv_item)
-        textView.text = tableBean.keyName
+
+        if (tableBean.keyName.contains("*")) {
+            val spannable = SpannableString(tableBean.keyName)
+            val index = tableBean.keyName.indexOf("*")
+            spannable.setSpan(ForegroundColorSpan(Color.RED), index, index + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            textView.text = spannable
+        } else {
+            textView.text = tableBean.keyName
+        }
 
         val select = holder.getView<TextView>(R.id.tv_select)
         val value = itemType.defaultValue as? String
@@ -38,6 +53,8 @@ class ItemSelect(tableBean: ItemTableBean, private val observer: (String, String
         }
         if (select.text.isEmpty())
             select.hint = "请选择"
+
+        select.gravity = itemType.selectTextGravity
 
         select.setOnClickListener {
             itemSelectClick?.invoke(this)

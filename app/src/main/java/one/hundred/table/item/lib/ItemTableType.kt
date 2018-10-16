@@ -6,6 +6,8 @@ import android.text.InputFilter
 import android.text.InputType
 import android.view.Gravity
 import one.hundred.table.R
+import one.hundred.table.item.factory.SelectType
+
 
 /**
  * Created by zzy on 2017/10/13.
@@ -47,9 +49,10 @@ sealed class ItemTableType {
      * mapValue 不为空时将value映射到map中
      */
     data class TextSelect(
+            val selectType: SelectType? = null,
             var mapValue: String? = null,
-            val selectList: List<Map<String, String>> = emptyList(),
             var defaultValue: Any? = "",
+            var selectTextGravity: Int = Gravity.CENTER_VERTICAL,
             val validateData: ItemValidateData = DefaultValidateData()) : ItemTableType()
 
     /**

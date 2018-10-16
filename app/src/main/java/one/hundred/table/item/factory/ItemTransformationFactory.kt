@@ -1,6 +1,9 @@
-package one.hundred.table.item.lib
+package one.hundred.table.item.factory
 
 import one.hundred.table.item.*
+import one.hundred.table.item.lib.ItemTable
+import one.hundred.table.item.lib.ItemTableBean
+import one.hundred.table.item.lib.ItemTableType
 
 /**
  * Created by zzy on 2017/10/13.
