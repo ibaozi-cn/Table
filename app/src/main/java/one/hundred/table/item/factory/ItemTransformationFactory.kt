@@ -25,20 +25,20 @@ object ItemTransformationFactory {
             list.map {
                 when (it.type) {
                     is ItemTableType.Text -> {
-                        ItemText(it, {
-                            itemTextClick?.invoke(it)
-                        })
+                        ItemText(it) { i ->
+                            itemTextClick?.invoke(i)
+                        }
                     }
                     is ItemTableType.TextEdit -> {
-                        ItemEdit(it, { key, value ->
+                        ItemEdit(it) { key, value ->
                             if ((it.type as ItemTableType.TextEdit).isEnable)
-                                map.put(key, value)
+                                map[key] = value
                             itemEditObserver?.invoke(key, value)
-                        })
+                        }
                     }
                     is ItemTableType.TextSelect -> {
                         ItemSelect(it, { key, value ->
-                            map.put(key, value)
+                            map[key] = value
                             itemSelectObserver?.invoke(key, value)
                         }, {
                             itemSelectClick?.invoke(it)
@@ -48,9 +48,9 @@ object ItemTransformationFactory {
                         ItemDivider(it)
                     }
                     is ItemTableType.TextAction -> {
-                        ItemAction(it, {
+                        ItemAction(it) {
                             actionClick?.invoke(it)
-                        })
+                        }
                     }
                 }
             }

@@ -8,6 +8,8 @@ import one.hundred.table.base.BaseLifeCyclePresenter
 import one.hundred.table.item.factory.ItemTransformationFactory
 import one.hundred.table.item.map.MapDemo
 import one.hundred.table.item.map.ServerData
+import org.jetbrains.anko.longToast
+import org.jetbrains.anko.toast
 
 /**
  * Created by zzy on 2017/10/13.
@@ -21,7 +23,7 @@ class LifecyclePresenter(val mapObserver: MutableMap<String, Any> = mutableMapOf
                 actionClick = {
                     when (it.itemType.aciton) {
                         ACTION_PHOTO -> {
-                            Log.d("Action", "Action onClick")
+                            baseLifeCycleView?.getContext()?.longToast("Action onClick")
                         }
                     }
                 })

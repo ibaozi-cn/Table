@@ -20,7 +20,7 @@ class LifecycleDemoActivity : LifecycleActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        addItemList(presenter.initViewData());
+        addItemList(presenter.initViewData())
     }
 
 
